@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kream.product.ProductMapper">
+	<resultMap type="com.kream.product.ProductDTO" id="Product">
+		<id column="product_id" property="productId"/>
+		<result column="name_kr" property="nameKr"/>
+		<result column="name_en" property="nameEn"/>
+		<result column="first_price" property="firstPrice"/>
+		<result column="release_day" property="releaseDay"/>
+		<result column="regist_day" property="registDay"/>
+	</resultMap>
+	
+	<resultMap type="com.kream.product.Category1DTO" id="cate1">
+		<id column="cate1_no" property="cate1No"/>
+		<result column="cate1_name" property="cate1Name"/>
+	</resultMap>
+	
+	<!-- 카테고리1 추가 -->
+	<insert id="cate1Insert" parameterType="com.kream.product.Category1DTO">
+		insert into category1 values(default, #{cate1Name})
+	</insert>
+	
+</mapper>
+
