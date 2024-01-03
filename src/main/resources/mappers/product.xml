@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kream.product.ProductMapper">
+	<resultMap type="com.kream.product.ProductDTO" id="product">
+		<id column="product_no" property="productNo"/>
+		<result column="product_id" property="productId"/>
+		<result column="name_kr" property="nameKr"/>
+		<result column="name_en" property="nameEn"/>
+		<result column="first_price" property="firstPrice"/>
+		<result column="release_day" property="releaseDay"/>
+		<result column="regist_day" property="registDay"/>
+		<result column="cate2_name" property="cate2Name"/>
+		<result column="cate1_name" property="cate1Name"/>
+	</resultMap>
+	
+	<resultMap type="com.kream.product.Category1DTO" id="cate1">
+		<id column="cate1_no" property="cate1No"/>
+		<result column="cate1_name" property="cate1Name"/>
+	</resultMap>
+
+	<resultMap type="com.kream.product.Category2DTO" id="cate2">
+		<id column="cate2_no" property="cate2No"/>
+		<result column="cate2_cate1" property="cate2Cate1"/>
+		<result column="cate2_name" property="cate2Name"/>
+		<result column="cate1_name" property="cate1Name"/>
+	</resultMap>
+
+	<resultMap type="com.kream.product.BrandDTO" id="brand">
+		<id column="brand_no" property="brandNo"/>
+		<result column="brand_name" property="brandName"/>
+	</resultMap>
+	
+	<!-- 카테고리2 리스트(1차값 넘김) -->
+	<select id="subcateList" resultMap="cate2">
+		select * from category2 where cate2_cate1 = #{num} order by cate2_no
+	</select>
+	
+	<!-- 상품 추가 -->
+	<insert id="productInsert" parameterType="com.kream.product.ProductDTO">
+		insert into product 
+			values(default, #{productId}, #{category1}, #{category2}, #{brand}, #{nameKr}, #{nameEn}, #{content}, #{firstPrice}, #{releaseDay}, now(), #{color}, #{size})
+	</insert>
+	
+	<!-- 상품 목록 -->
+	<select id="productList" resultMap="product">
+		SELECT A.*, B.cate1_name, C.cate2_name FROM product A, category1 B, category2 C WHERE A.category1 = B.cate1_no AND A.category2 = C.cate2_no
+	</select>
+	
+	<!-- 카테고리1 추가 -->
+	<insert id="cate1Insert" parameterType="com.kream.product.Category1DTO">
+		insert into category1 values(default, #{cate1Name})
+	</insert>
+	
+	<!-- 카테고리1 목록 -->
+	<select id="cate1List" resultMap="cate1">
+		select * from category1
+	</select>
+	
+	<!-- 카테고리2 추가 -->
+	<insert id="cate2Insert" parameterType="com.kream.product.Category2DTO">
+		insert into category2 values(default, #{cate2Cate1}, #{cate2Name})
+	</insert>
+	
+	<!-- 카테고리2 목록 -->
+	<select id="cate2List" resultMap="cate2">
+		SELECT * FROM category1 A, category2 B WHERE A.cate1_no = B.cate2_cate1
+	</select>
+	
+	<!-- 브랜드 추가 -->
+	<insert id="brandInsert" parameterType="com.kream.product.BrandDTO">
+		insert into brand values(default, #{brandName})
+	</insert>
+	
+	<!-- 브랜드 목록 -->
+	<select id="brandList" resultMap="brand">
+		SELECT * FROM brand
+	</select>
+	
+</mapper>
