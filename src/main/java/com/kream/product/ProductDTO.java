@@ -2,8 +2,11 @@ package com.kream.product;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ProductDTO {
-	private int productId;
+	private int productNo;
+	private String productId;
 	private String category1;
 	private String category2;
 	private String brand;
@@ -11,15 +14,25 @@ public class ProductDTO {
 	private String nameEn;
 	private String content;
 	private int firstPrice;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDay;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date registDay;
 	private String color;
 	private String size;
+	private String cate1Name;
+	private String cate2Name;
 	
-	public int getProductId() {
+	public int getProductNo() {
+		return productNo;
+	}
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
+	}
+	public String getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 	public String getCategory1() {
@@ -87,6 +100,18 @@ public class ProductDTO {
 	}
 	public void setSize(String size) {
 		this.size = size;
+	}
+	public String getCate1Name() {
+		return cate1Name;
+	}
+	public void setCate1Name(String cate1Name) {
+		this.cate1Name = cate1Name;
+	}
+	public String getCate2Name() {
+		return cate2Name;
+	}
+	public void setCate2Name(String cate2Name) {
+		this.cate2Name = cate2Name;
 	}
 	
 }

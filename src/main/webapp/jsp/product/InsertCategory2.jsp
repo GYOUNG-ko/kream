@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 <body>
 	<div align="center">
 		<table>
-			<form action="#" method="post">
+			<form action="InsertCategory2Proc" method="post">
 				<tr>
 					<th colspan="2">
 						<p>카테고리2</p>
@@ -29,21 +30,22 @@
 				<tr>
 					<td>카테고리1</td>
 					<td>
-						<select>
+						<select name="cate2Cate1">
 								<option>==선택==</option>
-								<option>의류</option>
-								<option>신발</option>
+								<c:forEach var="cate1" items="${cate1 }">
+									<option value="${cate1.cate1No }">${cate1.cate1Name }</option>
+								</c:forEach>
 						</select>
 					</td>
 				</tr><br>
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="cate1Name"><br></td>
+					<td><input type="text" name="cate2Name"><br></td>
 				</tr>
 				<tr>
 					<td align="center" colspan="2">
 					<input type="submit" value="추가">
-					<input type="button" value="목록">
+					<input type="button" value="목록" onclick="location.href='cate2List'">
 					</td>
 				</tr>
 			</form>

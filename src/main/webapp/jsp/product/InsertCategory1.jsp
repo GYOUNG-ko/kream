@@ -29,7 +29,7 @@
 				</td></tr>
 				<tr><td align="center">
 					<input type="submit" value="추가">
-					<input type="button" value="목록">
+					<input type="button" value="목록" onclick="location.href='cate1List'">
 				</td></tr>
 			</form>
 		</table>

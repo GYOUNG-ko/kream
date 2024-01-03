@@ -24,12 +24,16 @@ dependencies {
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
 	
-	// https://mvnrepository.com/artifact/javax.servlet/jstl
-	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.0'
+	implementation 'javax.servlet:javax.servlet-api:4.0.1'
+	// https://mvnrepository.com/artifact/javax.servlet/servlet-api
+	compileOnly 'javax.servlet:servlet-api:2.5'
 	
 }
+
+
 
 tasks.named('test') {
 	useJUnitPlatform()
