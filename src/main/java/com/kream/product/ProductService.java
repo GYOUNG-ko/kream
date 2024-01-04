@@ -68,7 +68,36 @@ public class ProductService {
 		List<BrandDTO> brand = mapper.brandList();
 		model.addAttribute("brand", brand);
 	}
+	
+	// 경매 등록
+	public String addAuctionProc(AuctionDTO dto) {
+		int result = mapper.addAuction(dto);
+		if(result == 1)
+			return "success";
+		return "fail";
+	}
+	// 경매 현황 목록
+	public void auctionStatusList(Model model) {
+		List<AuctionDTO> status = mapper.auctionStatusList(model);
+		model.addAttribute("status", status);
+	}
+	
+	// 경매 목록 보기
+	public void auctionList(Model model) {
+		List<AuctionDTO> auction = mapper.auctionList();
+		model.addAttribute("auction", auction);
+	}
 
+	// 파라미터 no받음 <오버로딩>
+	public void productList(Model model, int no) {
+		model.addAttribute("no", no);
+	}
+	
+	public String editAuctionProc(AuctionDTO dto) {
+		
+		return "";
+	}
+	
 
 	
 }

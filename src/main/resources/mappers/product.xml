@@ -32,6 +32,23 @@
 		<id column="brand_no" property="brandNo"/>
 		<result column="brand_name" property="brandName"/>
 	</resultMap>
+
+	<resultMap type="com.kream.product.AuctionDTO" id="auction">
+		<id column="auction_no" property="auctionNo"/>
+		<result column="auction_id" property="auctionId"/>
+		<result column="auction_start_day" property="auctionStartDay"/>
+		<result column="auction_start_time" property="auctionStartTime"/>
+		<result column="auction_end_day" property="auctionEndDay"/>
+		<result column="auction_end_time" property="auctionEndTime"/>
+		<result column="auction_start_price" property="auctionStartPrice"/>
+		<result column="auction_regist" property="auctionRegist"/>
+		<result column="status_name" property="statusName"/>
+	</resultMap>
+	
+	<resultMap type="com.kream.product.AuctionStatusDTO" id="status">
+		<id column="status_no" property="statusNo"/>
+		<result column="status_name" property="statusName"/>
+	</resultMap>
 	
 	<!-- 카테고리2 리스트(1차값 넘김) -->
 	<select id="subcateList" resultMap="cate2">
@@ -78,5 +95,22 @@
 	<select id="brandList" resultMap="brand">
 		SELECT * FROM brand
 	</select>
+	
+	<!-- 경매 추가 -->
+	<insert id="addAuction" parameterType="com.kream.product.AuctionDTO">
+		insert into auction values(default, #{auctionId}, #{auctionStartDay}, #{auctionStartTime}, #{auctionEndDay}, #{auctionEndTime}, #{auctionStartPrice}, now(), #{auctionStatus})
+	</insert>
+	
+	<!-- 경매현황 목록 -->
+	<select id="auctionStatusList" resultMap="status">
+		SELECT * FROM auction_status
+	</select>
+	
+	<!-- 경매 목록 -->
+	<select id="auctionList" resultMap="auction">
+		SELECT * FROM auction A, auction_status B WHERE A.auction_status = B.status_no
+	</select>
+	
+	
 	
 </mapper>

@@ -30,6 +30,7 @@
 					<th>상품 등록일</th>
 					<th>색상</th>
 					<th>사이즈</th>
+					<th>등록</th>
 				</tr>
 				<c:forEach var="product" items="${product}">
 					<tr>
@@ -46,6 +47,7 @@
 						<td><fmt:formatDate value="${product.registDay}" pattern="yyyy-MM-dd" /></td>
 						<td>${product.color }</td>
 						<td>${product.size }</td>
+						<td><a href="addAuction?no=${product.productNo }">경매등록</a></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -21,6 +21,11 @@ public class ProductController {
 		return "product/productList";
 	}
 	
+	@RequestMapping("list1")
+	private String list1() {
+		return "product/list1";
+	}
+	
 	@RequestMapping("insert")
 	public String index(Model model) {
 		service.cate1List(model);
@@ -115,6 +120,51 @@ public class ProductController {
 	private String brandList(Model model) {
 		service.brandList(model);
 		return "product/brandList";
+	}
+	
+	// 경매 등록
+	@RequestMapping("addAuction")
+	public String addAuction(Model model, int no) {
+		service.productList(model, no);
+		service.auctionStatusList(model); // 경매현황
+		return "product/addAuction";
+	}
+	
+	@RequestMapping("addAuctionProc")
+	public String addAuctionProc(AuctionDTO dto, Model model, RedirectAttributes ra) {
+		String msg = service.addAuctionProc(dto);
+		
+		if(msg.equals("success")) {
+			ra.addAttribute("msg", msg);
+			return "redirect:auctionList";
+		}
+		return "product/addAuction";
+	}
+	
+	// 경매 목록
+	@RequestMapping("auctionList")
+	private String auctionList(Model model) {
+		service.auctionList(model);
+		return "product/auctionList";
+	}
+	
+	// 경매 수정
+	@RequestMapping("editAuction")
+	private String editAuction(Model model) {
+		service.auctionList(model);
+		service.auctionStatusList(model); // 경매현황
+		return "product/editAuction";
+	}
+	
+	@RequestMapping("editAuctionProc")
+	private String auctionEditProc(AuctionDTO dto, Model model, RedirectAttributes ra) {
+		String msg = service.editAuctionProc(dto);
+		
+		if(msg.equals("success")) {
+			ra.addAttribute("msg", msg);
+			return "redirect:auctionList";
+		}
+		return "product/addAuction";
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.kream.product;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.ui.Model;
 
 @Mapper
 public interface ProductMapper {
@@ -25,6 +26,11 @@ public interface ProductMapper {
 
 	List<BrandDTO> brandList();
 
+	int addAuction(AuctionDTO dto);
+
+	List<AuctionDTO> auctionStatusList(Model model);
+
+	List<AuctionDTO> auctionList();
 
 
 }
